@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Filimon Matei · Fotograf & Videograf</title>
+<meta name="theme-color" content="#1c1c1c">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+  :root{
+    --bg:        #1c1c1c;
+    --bg-deep:   #141414;
+    --surface:   #262626;
+    --hairline:  rgba(255,255,255,.09);
+    --red:       #cf2b3a;
+    --red-bright:#e8404f;
+    --text:      #f3f1ee;
+    --muted:     #95949b;
+    --maxw: 1180px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; background:var(--bg); min-height:100%; }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Inter", system-ui, sans-serif;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  body::after{
+    content:"";
+    position:fixed; inset:0; z-index:9999; pointer-events:none;
+    opacity:.04; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a{ color:inherit; text-decoration:none; }
+  img,video,iframe{ display:block; max-width:100%; }
+
+  .wrap{ width:100%; max-width:var(--maxw); margin:0 auto; padding:0 28px; }
+
+  .mono{
+    font-family:"Space Mono", monospace;
+    letter-spacing:.04em;
+  }
+
+  .eyebrow{
+    font-family:"Space Mono", monospace;
+    font-size:.72rem; letter-spacing:.28em; text-transform:uppercase;
+    color:var(--red); display:inline-flex; align-items:center; gap:.7em;
+    margin-bottom:1.1rem;
+  }
+  .eyebrow::before{
+    content:""; width:34px; height:1px; background:var(--red);
+  }
+
+  .section-title{
+    font-family:"Fraunces", serif;
+    font-weight:400;
+    font-size:clamp(2.1rem, 5vw, 3.6rem);
+    line-height:1.05;
+    letter-spacing:-.01em;
+  }
+
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(20,20,20,.72);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--hairline);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    height:68px;
+  }
+  .logo{
+    font-family:"Fraunces", serif; font-size:1.15rem; font-weight:500;
+    letter-spacing:.02em;
+  }
+  .logo span{ color:var(--red); }
+  .nav-links{ display:flex; gap:34px; }
+  .nav-links a{
+    font-size:.82rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--muted); transition:color .25s;
+  }
+  .nav-links a:hover{ color:var(--text); }
+  .nav-toggle{ display:none; background:none; border:0; color:var(--text); cursor:pointer; }
+
+  header#acasa{
+    position:relative;
+    min-height:100vh;
+    display:flex; align-items:center;
+    padding:120px 0 80px;
+  }
+
+  .viewfinder{ position:absolute; inset:34px; pointer-events:none; z-index:1; }
+  .vf{ position:absolute; width:42px; height:42px; border:2px solid rgba(255,255,255,.22); }
+  .vf.tl{ top:0; left:0; border-right:0; border-bottom:0; }
+  .vf.tr{ top:0; right:0; border-left:0; border-bottom:0; }
+  .vf.bl{ bottom:0; left:0; border-right:0; border-top:0; }
+  .vf.br{ bottom:0; right:0; border-left:0; border-top:0; }
+
+  .rec{
+    position:absolute; top:50px; right:54px; z-index:2;
+    display:flex; align-items:center; gap:.6em;
+    font-family:"Space Mono", monospace; font-size:.74rem;
+    letter-spacing:.18em; color:var(--muted);
+  }
+  .rec .dot{
+    width:9px; height:9px; border-radius:50%; background:var(--red);
+    animation:blink 1.6s steps(2,start) infinite;
+  }
+  @keyframes blink{ 50%{ opacity:.15; } }
+
+  .hero-content{ position:relative; z-index:2; max-width:880px; }
+  .hero-content .eyebrow{ animation:rise .8s .1s both; }
+  .hero-name{
+    font-family:"Fraunces", serif; font-weight:300;
+    font-size:clamp(3rem, 11vw, 7.4rem);
+    line-height:.95; letter-spacing:-.02em;
+    margin:.2rem 0 .4rem;
+    animation:rise .9s .2s both;
+  }
+  .hero-name em{ font-style:italic; color:var(--red); }
+  .hero-role{
+    font-size:clamp(1.1rem,2.5vw,1.55rem); color:var(--text);
+    font-weight:500; animation:rise .9s .35s both;
+  }
+  .hero-tag{
+    margin-top:1.6rem; max-width:540px; color:var(--muted);
+    font-size:1.05rem; animation:rise .9s .5s both;
+  }
+  .hero-cta{
+    margin-top:2.6rem; display:flex; gap:16px; flex-wrap:wrap;
+    animation:rise .9s .65s both;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:.6em;
+    padding:.85em 1.6em; font-size:.84rem; letter-spacing:.1em;
+    text-transform:uppercase; border-radius:2px; transition:.25s;
+    font-weight:500;
+  }
+  .btn-primary{ background:var(--red); color:#fff; }
+  .btn-primary:hover{ background:var(--red-bright); transform:translateY(-2px); }
+  .btn-ghost{ border:1px solid var(--hairline); color:var(--text); }
+  .btn-ghost:hover{ border-color:var(--red); color:var(--red); }
+
+  .scroll-cue{
+    position:absolute; bottom:38px; left:50%; transform:translateX(-50%);
+    font-family:"Space Mono",monospace; font-size:.68rem; letter-spacing:.25em;
+    color:var(--muted); text-transform:uppercase; z-index:2;
+    display:flex; flex-direction:column; align-items:center; gap:.7em;
+  }
+  .scroll-cue::after{
+    content:""; width:1px; height:46px;
+    background:linear-gradient(var(--red), transparent);
+    animation:drop 2s ease-in-out infinite;
+  }
+  @keyframes drop{ 0%,100%{ transform:scaleY(.4); transform-origin:top; } 50%{ transform:scaleY(1); } }
+
+  @keyframes rise{ from{ opacity:0; transform:translateY(26px); } to{ opacity:1; transform:none; } }
+
+  section{ padding:120px 0; position:relative; }
+
+  .about-grid{
+    display:grid; grid-template-columns:0.85fr 1.15fr; gap:60px; align-items:center;
+  }
+  .portrait{
+    position:relative; aspect-ratio:4/5; border-radius:3px; overflow:hidden;
+    background:linear-gradient(135deg,#2b2b2b,#181818);
+    border:1px solid var(--hairline);
+  }
+  .portrait::before{
+    content:"PORTRET"; position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Space Mono",monospace; font-size:.8rem; letter-spacing:.3em;
+    color:rgba(255,255,255,.18);
+  }
+  .portrait img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:1; }
+  .portrait .corner{ position:absolute; width:22px; height:22px; border:2px solid var(--red); z-index:2; }
+  .portrait .corner.tl{ top:14px; left:14px; border-right:0; border-bottom:0; }
+  .portrait .corner.br{ bottom:14px; right:14px; border-left:0; border-top:0; }
+
+  .about-text p{ color:var(--muted); margin-bottom:1.2rem; }
+  .about-text p strong{ color:var(--text); font-weight:600; }
+
+  .specialties{ list-style:none; display:flex; flex-wrap:wrap; gap:10px; margin-top:1.8rem; }
+  .specialties li{
+    font-family:"Space Mono",monospace; font-size:.78rem; letter-spacing:.05em;
+    padding:.5em 1em; border:1px solid var(--hairline); border-radius:2px;
+    color:var(--text);
+  }
+  .specialties li::before{ content:"▸ "; color:var(--red); }
+
+  .section-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:30px; margin-bottom:54px; flex-wrap:wrap; }
+  .section-head p{ color:var(--muted); max-width:380px; }
+
+  .projects{ display:grid; grid-template-columns:repeat(2,1fr); gap:26px; }
+  .project.wide{ grid-column:span 2; }
+
+  .project{
+    position:relative; border-radius:4px; overflow:hidden;
+    background:var(--surface); border:1px solid var(--hairline);
+    transition:transform .4s, border-color .4s;
+  }
+  .project:hover{ transform:translateY(-6px); border-color:rgba(207,43,58,.5); }
+
+  .project__media{
+    position:relative; aspect-ratio:16/10; overflow:hidden;
+    background:
+      radial-gradient(circle at 30% 30%, #2e2e2e, transparent 60%),
+      linear-gradient(135deg,#272727,#161616);
+  }
+  .project.wide .project__media{ aspect-ratio:21/9; }
+
+  .project__media .ph{
+    position:absolute; inset:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:.6rem; color:rgba(255,255,255,.22);
+  }
+  .project__media .ph .num{ font-family:"Space Mono",monospace; font-size:2.4rem; letter-spacing:.05em; }
+  .project__media .ph .lbl{ font-family:"Space Mono",monospace; font-size:.66rem; letter-spacing:.25em; text-transform:uppercase; }
+
+  .project__media img,
+  .project__media video,
+  .project__media iframe{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    border:0; z-index:2;
+  }
+  .project:hover .project__media img{ transform:scale(1.04); }
+  .project__media img{ transition:transform .6s; }
+
+  .project__body{ padding:22px 24px 26px; }
+  .project__cat{
+    font-family:"Space Mono",monospace; font-size:.7rem; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--red); display:block; margin-bottom:.6rem;
+  }
+  .project__title{ font-family:"Fraunces",serif; font-size:1.5rem; font-weight:500; margin-bottom:.5rem; }
+  .project__desc{ color:var(--muted); font-size:.96rem; }
+
+  #contact{ padding-bottom:60px; }
+  .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; }
+  .contact-lead{ font-family:"Fraunces",serif; font-size:clamp(1.6rem,3.5vw,2.4rem); font-weight:400; line-height:1.25; }
+  .contact-lead em{ font-style:italic; color:var(--red); }
+
+  .contact-list{ list-style:none; }
+  .contact-list li{ border-top:1px solid var(--hairline); padding:18px 0; display:flex; justify-content:space-between; align-items:center; gap:20px; }
+  .contact-list li:last-child{ border-bottom:1px solid var(--hairline); }
+  .contact-list .k{ font-family:"Space Mono",monospace; font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
+  .contact-list .v{ font-size:1.02rem; transition:color .25s; }
+  .contact-list a.v:hover{ color:var(--red); }
+
+  footer{
+    background:var(--bg-deep); border-top:1px solid var(--hairline);
+    padding:34px 0; margin-top:60px;
+  }
+  .foot-inner{ display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; }
+  .foot-inner .mono{ font-size:.74rem; color:var(--muted); letter-spacing:.1em; }
+  .foot-inner .logo{ font-size:1rem; }
+
+  .reveal{ opacity:0; transform:translateY(30px); transition:opacity .7s, transform .7s; }
+  .reveal.in{ opacity:1; transform:none; }
+
+  .promise{
+    background:var(--bg-deep);
+    border-top:1px solid var(--hairline); border-bottom:1px solid var(--hairline);
+  }
+  .promise .wrap{ padding:66px 28px; text-align:center; }
+  .promise .eyebrow{ justify-content:center; }
+  .promise p{
+    font-family:"Fraunces",serif; font-weight:300;
+    font-size:clamp(1.5rem,3.4vw,2.5rem); line-height:1.3; letter-spacing:-.01em;
+    max-width:24ch; margin:0 auto;
+  }
+  .promise p em{ font-style:italic; color:var(--red); }
+
+  .filters{
+    display:flex; flex-wrap:wrap; gap:10px; margin:38px 0 40px;
+  }
+  .filter-btn{
+    font-family:"Space Mono",monospace; font-size:.74rem; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--muted);
+    padding:.55em 1.2em; border:1px solid var(--hairline); border-radius:2px;
+    background:none; cursor:pointer; transition:.25s;
+  }
+  .filter-btn:hover{ color:var(--text); border-color:rgba(255,255,255,.25); }
+  .filter-btn.active{ color:#fff; background:var(--red); border-color:var(--red); }
+
+  .gallery{
+    display:grid; grid-template-columns:repeat(4,1fr);
+    grid-auto-rows:178px; grid-auto-flow:dense; gap:14px;
+  }
+  .shot{
+    position:relative; overflow:hidden; border-radius:4px;
+    border:1px solid var(--hairline); background:
+      radial-gradient(circle at 35% 30%, #2e2e2e, transparent 60%),
+      linear-gradient(135deg,#262626,#161616);
+    cursor:pointer;
+    transition:transform .45s cubic-bezier(.2,.7,.2,1), border-color .35s, box-shadow .45s;
+  }
+  .shot.feat{ grid-column:span 2; grid-row:span 2; }
+  .shot:hover{
+    transform:translateY(-4px);
+    border-color:rgba(207,43,58,.55);
+    box-shadow:0 14px 34px rgba(0,0,0,.45);
+    z-index:3;
+  }
+  .shot img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    object-position:center 25%;
+    z-index:1; opacity:0; transition:transform .7s cubic-bezier(.2,.7,.2,1), filter .4s, opacity .4s;
+    filter:grayscale(.15);
+  }
+  .shot img[src]{ opacity:1; }
+  .shot:hover img{ transform:scale(1.08); filter:grayscale(0); }
+
+  .shot .ph-tag{
+    position:absolute; inset:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:.5rem;
+    color:rgba(255,255,255,.2); pointer-events:none;
+  }
+  .shot .ph-tag .n{ font-family:"Space Mono",monospace; font-size:1.5rem; }
+  .shot.feat .ph-tag .n{ font-size:2.4rem; }
+  .shot .ph-tag .t{ font-family:"Space Mono",monospace; font-size:.6rem; letter-spacing:.25em; text-transform:uppercase; }
+
+  .shot .cap{
+    position:absolute; inset:0; z-index:2; opacity:0; transition:opacity .35s;
+    background:linear-gradient(transparent 45%, rgba(15,15,15,.85));
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding:18px 18px 16px;
+  }
+  .shot:hover .cap{ opacity:1; }
+  .shot .cap .cat{
+    font-family:"Space Mono",monospace; font-size:.62rem; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--red); margin-bottom:.3rem;
+  }
+  .shot .cap .ttl{ font-family:"Fraunces",serif; font-size:1.05rem; }
+  .shot .cap::after{
+    content:"⤢"; position:absolute; top:14px; right:16px;
+    font-size:1.1rem; color:var(--text); opacity:.85;
+  }
+  .shot.hide{ display:none; }
+
+  .lightbox{
+    position:fixed; inset:0; z-index:1000; display:none;
+    align-items:center; justify-content:center;
+    background:rgba(10,10,10,.94); backdrop-filter:blur(6px);
+    padding:40px;
+  }
+  .lightbox.open{ display:flex; animation:lbfade .3s both; }
+  @keyframes lbfade{ from{ opacity:0; } to{ opacity:1; } }
+  .lightbox img{
+    max-width:90vw; max-height:82vh; border:1px solid var(--hairline);
+    border-radius:3px; object-fit:contain;
+  }
+  .lb-empty{
+    width:min(680px,80vw); aspect-ratio:3/2;
+    display:flex; align-items:center; justify-content:center;
+    border:1px solid var(--hairline); border-radius:3px;
+    font-family:"Space Mono",monospace; letter-spacing:.2em; color:rgba(255,255,255,.3);
+    background:linear-gradient(135deg,#222,#141414);
+  }
+  .lb-cap{
+    position:absolute; bottom:30px; left:50%; transform:translateX(-50%);
+    font-family:"Space Mono",monospace; font-size:.74rem; letter-spacing:.15em;
+    color:var(--muted); text-align:center;
+  }
+  .lb-cap b{ color:var(--red); font-weight:400; }
+  .lb-close, .lb-nav{
+    position:absolute; background:none; border:1px solid var(--hairline);
+    color:var(--text); cursor:pointer; transition:.25s;
+    width:48px; height:48px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:1.3rem;
+  }
+  .lb-close{ top:28px; right:28px; }
+  .lb-nav{ top:50%; transform:translateY(-50%); }
+  .lb-prev{ left:28px; }
+  .lb-next{ right:28px; }
+  .lb-close:hover, .lb-nav:hover{ border-color:var(--red); color:var(--red); }
+
+  .services{ display:grid; grid-template-columns:repeat(2,1fr); gap:22px; margin-top:14px; }
+  .service{
+    position:relative; padding:34px 30px 32px;
+    background:var(--surface); border:1px solid var(--hairline); border-radius:4px;
+    transition:transform .4s, border-color .4s;
+  }
+  .service:hover{ transform:translateY(-5px); border-color:rgba(207,43,58,.5); }
+  .service .s-num{
+    font-family:"Space Mono",monospace; font-size:.72rem; letter-spacing:.2em;
+    color:var(--red);
+  }
+  .service h3{
+    font-family:"Fraunces",serif; font-weight:500; font-size:1.55rem;
+    margin:.5rem 0 .8rem;
+  }
+  .service p{ color:var(--muted); font-size:.97rem; margin-bottom:1.3rem; }
+  .service ul{ list-style:none; }
+  .service li{
+    color:var(--text); font-size:.92rem; padding:.45em 0;
+    border-top:1px solid var(--hairline); display:flex; gap:.7em; align-items:baseline;
+  }
+  .service li::before{ content:"▸"; color:var(--red); font-size:.8em; }
+  .service .price{
+    margin-top:1.4rem; font-family:"Space Mono",monospace; font-size:.8rem;
+    letter-spacing:.05em; color:var(--muted);
+  }
+  .service .price b{ color:var(--text); font-weight:700; }
+
+  .service.full{ grid-column:span 2; }
+  .service.full ul{ columns:2; column-gap:34px; }
+  .service.full li{ break-inside:avoid; }
+
+  .process{ display:grid; grid-template-columns:repeat(5,1fr); gap:0; margin-top:14px; }
+  .step{ padding:30px 22px 26px; border-left:1px solid var(--hairline); position:relative; }
+  .step:first-child{ border-left:0; }
+  .step .st-num{
+    font-family:"Fraunces",serif; font-weight:300; font-size:2.6rem;
+    color:var(--red); line-height:1; opacity:.9;
+  }
+  .step h4{
+    font-family:"Inter",sans-serif; font-weight:600; font-size:1.05rem;
+    margin:.9rem 0 .5rem;
+  }
+  .step p{ color:var(--muted); font-size:.88rem; }
+
+  .quotes{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:14px; }
+  .quote{
+    padding:32px 28px; background:var(--surface);
+    border:1px solid var(--hairline); border-radius:4px; position:relative;
+  }
+  .quote::before{
+    content:"“"; font-family:"Fraunces",serif; font-size:4rem; color:var(--red);
+    line-height:.6; opacity:.5; display:block; margin-bottom:.4rem;
+  }
+  .quote p{ color:var(--text); font-size:1rem; line-height:1.6; margin-bottom:1.4rem; }
+  .quote .who{ display:flex; flex-direction:column; gap:.15rem; }
+  .quote .who .name{ font-weight:600; font-size:.95rem; }
+  .quote .who .role{ font-family:"Space Mono",monospace; font-size:.7rem; letter-spacing:.12em; color:var(--muted); text-transform:uppercase; }
+
+  .faq{ max-width:820px; margin-top:14px; }
+  .faq details{
+    border-bottom:1px solid var(--hairline);
+  }
+  .faq summary{
+    list-style:none; cursor:pointer; padding:24px 0;
+    display:flex; justify-content:space-between; align-items:center; gap:20px;
+    font-family:"Fraunces",serif; font-size:1.18rem; font-weight:500;
+    transition:color .25s;
+  }
+  .faq summary::-webkit-details-marker{ display:none; }
+  .faq summary::after{
+    content:"+"; font-family:"Space Mono",monospace; color:var(--red);
+    font-size:1.4rem; flex-shrink:0; transition:transform .3s;
+  }
+  .faq details[open] summary::after{ transform:rotate(45deg); }
+  .faq summary:hover{ color:var(--red); }
+  .faq .ans{ color:var(--muted); padding:0 0 24px; font-size:.97rem; max-width:90%; }
+
+  .contact-form{ display:flex; flex-direction:column; gap:16px; margin-top:8px; }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .field{ display:flex; flex-direction:column; gap:.5rem; }
+  .field label{
+    font-family:"Space Mono",monospace; font-size:.68rem; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--muted);
+  }
+  .field input, .field select, .field textarea{
+    background:var(--bg-deep); border:1px solid var(--hairline); border-radius:3px;
+    color:var(--text); font-family:"Inter",sans-serif; font-size:.97rem;
+    padding:.85em 1em; transition:border-color .25s;
+  }
+  .field textarea{ resize:vertical; min-height:130px; }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:none; border-color:var(--red);
+  }
+  .field select{ appearance:none; cursor:pointer; }
+  .contact-form .btn-primary{ align-self:flex-start; border:0; cursor:pointer; }
+  .form-note{ font-family:"Space Mono",monospace; font-size:.7rem; color:var(--muted); letter-spacing:.05em; }
+
+  .hero-bg{ position:absolute; inset:0; z-index:0; overflow:hidden; }
+  .hero-bg img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    opacity:0; transition:opacity .6s;
+  }
+  .hero-bg img[src]{ opacity:.38; }
+  .hero-bg::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(100deg, var(--bg) 18%, rgba(28,28,28,.78) 55%, rgba(28,28,28,.45) 100%);
+  }
+
+  .filmstrip{ background:#0c0c0c; padding:14px 0; position:relative; }
+
+  .filmstrip::before, .filmstrip::after{
+    content:""; position:absolute; left:0; right:0; height:9px;
+    background:repeating-linear-gradient(to right,
+      var(--bg) 0 9px, transparent 9px 26px);
+    opacity:.5;
+  }
+  .filmstrip::before{ top:2px; }
+  .filmstrip::after{ bottom:2px; }
+  .filmstrip-head{
+    font-family:"Space Mono",monospace; font-size:.66rem; letter-spacing:.28em;
+    text-transform:uppercase; color:var(--muted); padding:6px 28px 12px;
+    display:flex; align-items:center; gap:.7em;
+  }
+  .filmstrip-head .dot{ width:7px; height:7px; border-radius:50%; background:var(--red); }
+  .filmstrip-track{
+    display:flex; gap:10px; overflow-x:auto; padding:6px 28px 10px;
+    scroll-snap-type:x mandatory; scrollbar-width:thin; scrollbar-color:var(--red) #0c0c0c;
+  }
+  .filmstrip-track::-webkit-scrollbar{ height:6px; }
+  .filmstrip-track::-webkit-scrollbar-thumb{ background:var(--red); border-radius:3px; }
+  .filmframe{
+    flex:1 1 0; min-width:0; aspect-ratio:4/3; position:relative;
+    overflow:hidden; border:1px solid var(--hairline); border-radius:3px;
+    background:linear-gradient(135deg,#222,#141414); scroll-snap-align:start;
+  }
+  .filmframe img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:transform .5s; }
+  .filmframe img[src]{ opacity:1; }
+  .filmframe:hover img[src]{ transform:scale(1.05); }
+  .filmframe .fn{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-family:"Space Mono",monospace; font-size:1.1rem; color:rgba(255,255,255,.2);
+    pointer-events:none;
+  }
+
+  @media (max-width:860px){
+    .nav-links{
+      position:fixed; inset:68px 0 auto 0; background:var(--bg-deep);
+      flex-direction:column; gap:0; padding:10px 0;
+      border-bottom:1px solid var(--hairline);
+      transform:translateY(-130%); transition:transform .35s; opacity:0;
+    }
+    .nav-links.open{ transform:none; opacity:1; }
+    .nav-links a{ padding:14px 28px; }
+    .nav-toggle{ display:block; }
+    .about-grid, .contact-grid{ grid-template-columns:1fr; gap:36px; }
+    .projects{ grid-template-columns:1fr; }
+    .project.wide{ grid-column:span 1; }
+    .rec{ right:24px; top:30px; }
+    .viewfinder{ inset:18px; }
+    section{ padding:84px 0; }
+
+    .gallery{ grid-template-columns:repeat(2,1fr); grid-auto-rows:150px; }
+    .services{ grid-template-columns:1fr; }
+    .service.full ul{ columns:1; }
+    .process{ grid-template-columns:1fr; }
+    .step{ border-left:0; border-top:1px solid var(--hairline); }
+    .step:first-child{ border-top:0; }
+    .form-row{ grid-template-columns:1fr; }
+    .filmframe{ flex:0 0 80vw; }
+    .lb-nav{ width:42px; height:42px; }
+    .lb-prev{ left:14px; } .lb-next{ right:14px; }
+    .lb-close{ top:18px; right:18px; }
+  }
+
+  @media (max-width:520px){
+    .gallery{ grid-template-columns:repeat(2,1fr); grid-auto-rows:128px; }
+    .shot.feat{ grid-column:span 2; grid-row:span 2; }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{ animation:none !important; transition:none !important; scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#acasa" class="logo">Filimon<span>.</span>Matei</a>
+    <button class="nav-toggle" aria-label="Meniu" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+    <div class="nav-links" id="navlinks">
+      <a href="#acasa">Acasă</a>
+      <a href="#despre">Despre</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#proiecte">Proiecte</a>
+      <a href="#servicii">Servicii</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header id="acasa">
+
+  <div class="hero-bg"><img alt=""></div>
+
+  <div class="viewfinder">
+    <span class="vf tl"></span><span class="vf tr"></span>
+    <span class="vf bl"></span><span class="vf br"></span>
+  </div>
+  <div class="rec mono"><span class="dot"></span> REC · 24FPS</div>
+
+  <div class="wrap hero-content">
+    <span class="eyebrow">Fotograf &amp; Videograf · România</span>
+    <h1 class="hero-name">Filimon <em>Matei</em></h1>
+    <p class="hero-role">Surprind momente în fotografie și film.</p>
+    <p class="hero-tag">
+      Povești vizuale pentru evenimente, portrete și film,
+      cu o estetică curată, cinematică și plină de emoție.
+    </p>
+    <div class="hero-cta">
+      <a href="#proiecte" class="btn btn-primary">Vezi proiectele</a>
+      <a href="#contact" class="btn btn-ghost">Contactează-mă</a>
+    </div>
+  </div>
+
+  <div class="scroll-cue">scroll</div>
+</header>
+
+<section id="despre">
+  <div class="wrap about-grid">
+
+    <div class="portrait reveal">
+      <span class="corner tl"></span><span class="corner br"></span>
+       POZA TA DE PORTRET:
+           Pune fișierul (ex: portret.jpg) lângă acest fișier și
+           decomentează linia de mai jos, înlocuind numele fișierului.
+      <img src="_DSC8606.jpg" alt="Filimon Matei">
+    </div>
+
+    <div class="about-text reveal">
+      <span class="eyebrow">Despre mine</span>
+      <h2 class="section-title">Din spatele obiectivului</h2>
+      <p style="margin-top:1.6rem;">
+        Sunt <strong>Filimon Matei</strong>, pasionat de imagine, de lumină,
+        de cadre și de poveștile care merită ținute minte. Lucrez atât cu
+        oameni, cât și cu branduri, căutând mereu acel detaliu autentic care
+        face diferența.
+      </p>
+      <p>
+        De la evenimente, la portrete și film, abordez
+        fiecare proiect cu aceeași grijă: o imagine bună spune ceva, una
+        memorabilă te face să simți ceva.
+      </p>
+
+      <ul class="specialties">
+        <li>Evenimente</li>
+        <li>Portrete</li>
+        <li>Videoclipuri</li>
+        <li>Film</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="promise">
+  <div class="wrap">
+    <span class="eyebrow reveal">De încredere</span>
+    <p class="reveal">Nu țin scorul în cifre. Țin minte că <em>fiecare</em> om care a lucrat cu mine a rămas cu materiale de care e mulțumit.</p>
+  </div>
+</section>
+
+<section id="galerie">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Galerie</span>
+        <h2 class="section-title">Cadre din portofoliu</h2>
+      </div>
+      <p>Apasă pe o categorie ca să filtrezi, sau pe o imagine ca s-o vezi mărită.</p>
+    </div>
+
+    <div class="filters reveal">
+      <button class="filter-btn active" data-filter="toate">Toate</button>
+      <button class="filter-btn" data-filter="evenimente">Evenimente &amp; concerte</button>
+      <button class="filter-btn" data-filter="portrete">Portrete</button>
+    </div>
+
+    <div class="gallery">
+
+      <figure class="shot reveal" data-cat="evenimente" data-title="Concert" data-img="IMG_5059.JPG">
+        <span class="ph-tag"><span class="n">01</span><span class="t">Concert</span></span>
+        <img src="IMG_5059.JPG" alt="Concert" style="object-position:center center;">
+        <span class="cap"><span class="cat">Concert</span></span>
+      </figure>
+
+      <figure class="shot reveal" data-cat="portrete" data-title="Portret" data-img="IMG_3989-2.jpg">
+        <span class="ph-tag"><span class="n">02</span><span class="t">Portret</span></span>
+        <img src="IMG_3989-2.jpg" alt="Portret">
+        <span class="cap"><span class="cat">Portret</span></span>
+      </figure>
+
+      <figure class="shot reveal" data-cat="evenimente" data-title="Concert" data-img="IMG_5063.JPG">
+        <span class="ph-tag"><span class="n">03</span><span class="t">Eveniment</span></span>
+        <img src="IMG_5063.JPG" alt="Concert">
+        <span class="cap"><span class="cat">Eveniment</span></span>
+      </figure>
+
+      <figure class="shot reveal" data-cat="evenimente" data-title="Concert" data-img="IMG_202606252100052.JPG">
+        <span class="ph-tag"><span class="n">04</span><span class="t">Eveniment</span></span>
+        <img src="IMG_202606252100052.JPG" alt="Concert">
+        <span class="cap"><span class="cat">Eveniment</span></span>
+      </figure>
+
+      <figure class="shot reveal" data-cat="evenimente" data-title="Concert" data-img="IMG_202606252100056.JPG">
+        <span class="ph-tag"><span class="n">05</span><span class="t">Concert</span></span>
+        <img src="IMG_202606252100056.JPG" alt="Concert">
+        <span class="cap"><span class="cat">Concert</span></span>
+      </figure>
+
+      <figure class="shot reveal" data-cat="portrete" data-title="Portret" data-img="DSC08523.jpg">
+        <span class="ph-tag"><span class="n">06</span><span class="t">Portret</span></span>
+        <img src="DSC08523.jpg" alt="Portret">
+        <span class="cap"><span class="cat">Portret</span></span>
+      </figure>
+
+      <figure class="shot reveal" data-cat="evenimente" data-title="Concert" data-img="IMG_2026062521000511.JPG">
+        <span class="ph-tag"><span class="n">07</span><span class="t">Eveniment</span></span>
+        <img src="IMG_2026062521000511.JPG" alt="Concert">
+        <span class="cap"><span class="cat">Eveniment</span></span>
+      </figure>
+
+      <figure class="shot reveal" data-cat="evenimente" data-title="Concert" data-img="IMG_2026062521000513.JPG">
+        <span class="ph-tag"><span class="n">08</span><span class="t">Concert</span></span>
+        <img src="IMG_2026062521000513.JPG" alt="Concert" style="object-position:center 38%;">
+        <span class="cap"><span class="cat">Concert</span></span>
+      </figure>
+
+      <figure class="shot reveal" data-cat="evenimente" data-title="Concert" data-img="IMG_2026062521000515.JPG">
+        <span class="ph-tag"><span class="n">09</span><span class="t">Concert</span></span>
+        <img src="IMG_2026062521000515.JPG" alt="Concert" style="object-position:center 38%;">
+        <span class="cap"><span class="cat">Concert</span></span>
+      </figure>
+
+      <figure class="shot reveal" data-cat="portrete" data-title="Portret" data-img="IMG_202606242227264.jpg">
+        <span class="ph-tag"><span class="n">10</span><span class="t">Portret</span></span>
+        <img src="IMG_202606242227264.jpg" alt="Portret">
+        <span class="cap"><span class="cat">Portret</span></span>
+      </figure>
+
+      <figure class="shot reveal" data-cat="evenimente" data-title="Concert" data-img="IMG_2026062521000516.JPG">
+        <span class="ph-tag"><span class="n">11</span><span class="t">Eveniment</span></span>
+        <img src="IMG_2026062521000516.JPG" alt="Concert" style="object-position:70% center;">
+        <span class="cap"><span class="cat">Eveniment</span></span>
+      </figure>
+
+      <figure class="shot reveal" data-cat="portrete" data-title="Portret" data-img="_DSC8606.jpg">
+        <span class="ph-tag"><span class="n">12</span><span class="t">Portret</span></span>
+        <img src="_DSC8606.jpg" alt="Portret" style="object-position:center 42%;">
+        <span class="cap"><span class="cat">Portret</span></span>
+      </figure>
+
+      <figure class="shot reveal" data-cat="evenimente" data-title="Concert" data-img="IMG_2026062521000517.JPG">
+        <span class="ph-tag"><span class="n">13</span><span class="t">Concert</span></span>
+        <img src="IMG_2026062521000517.JPG" alt="Concert">
+        <span class="cap"><span class="cat">Concert</span></span>
+      </figure>
+
+      <figure class="shot reveal" data-cat="evenimente" data-title="Concert" data-img="_1079260.jpg">
+        <span class="ph-tag"><span class="n">15</span><span class="t">Eveniment</span></span>
+        <img src="_1079260.jpg" alt="Concert">
+        <span class="cap"><span class="cat">Eveniment</span></span>
+      </figure>
+
+      <figure class="shot reveal" data-cat="evenimente" data-title="Concert" data-img="_1079562-2.jpg">
+        <span class="ph-tag"><span class="n">16</span><span class="t">Eveniment</span></span>
+        <img src="_1079562-2.jpg" alt="Concert">
+        <span class="cap"><span class="cat">Eveniment</span></span>
+      </figure>
+
+    </div>
+  </div>
+</section>
+
+<section id="proiecte">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Portofoliu</span>
+        <h2 class="section-title">Proiecte selectate</h2>
+      </div>
+      <p>O selecție din lucrările pe care le-am făcut de-a lungul timpului.</p>
+    </div>
+
+    <div class="projects">
+
+      <article class="project reveal">
+        <div class="project__media">
+          <div class="ph"><span class="num">01</span><span class="lbl">Foto</span></div>
+          <img src="_1045916.jpg" alt="Concert BBB">
+        </div>
+        <div class="project__body">
+          <span class="project__cat">Concert</span>
+          <h3 class="project__title">Concert AlbertNBN </h3>
+          <p class="project__desc">Fotografie color la concert.</p>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="project__media">
+          <div class="ph"><span class="num">02</span><span class="lbl">Foto</span></div>
+          <img src="IMG_202606242227264.jpg" alt="Portret studio">
+        </div>
+        <div class="project__body">
+          <span class="project__cat">Portret</span>
+          <h3 class="project__title">Serie de studio</h3>
+          <p class="project__desc">Portret editorial cu lumină controlată.</p>
+        </div>
+      </article>
+
+      <article class="project wide reveal">
+        <div class="project__media">
+          <div class="ph"><span class="num">03</span><span class="lbl">Video</span></div>
+
+          <iframe src="https://youtu.be/f2v9SoKsLyU" title="Showreel" allowfullscreen></iframe>
+
+          <video src="copy_BCC51057-2C05-4B17-904A-BFFA2348E21A.mov#t=0.1" controls preload="metadata">
+</video>
+         </div>
+        <div class="project__body">
+          <span class="project__cat">Showreel</span>
+          <h3 class="project__title">Montaj cinematic alb-negru</h3>
+          <p class="project__desc">Un edit alb-negru, fast-paced, construit pe dublă expunere, ritm și atmosferă.</p>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="project__media">
+          <div class="ph"><span class="num">04</span><span class="lbl">Foto</span></div>
+          <img src="IMG_3989-2.jpg" alt="Eveniment corporate">
+        </div>
+        <div class="project__body">
+          <span class="project__cat">Shoot privat</span>
+          <h3 class="project__title">Ședință foto creativă</h3>
+          <p class="project__desc">Fotografiere creativă a unui subiect cu lumină de apus în spate.</p>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="project__media">
+          <div class="ph"><span class="num">05</span><span class="lbl">Foto</span></div>
+          <img src="IMG_5062.JPG" alt="Concert Rick Ross">
+        </div>
+        <div class="project__body">
+          <span class="project__cat">Concert</span>
+          <h3 class="project__title">Concert Rick Ross</h3>
+          <p class="project__desc">Fotografie alb negru la concert.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="servicii">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Ce ofer</span>
+        <h2 class="section-title">Servicii &amp; pachete</h2>
+      </div>
+      <p>Pachete gândite să acopere de la un portret simplu, la acoperire video completă.</p>
+    </div>
+
+    <div class="services">
+
+      <article class="service full reveal">
+        <span class="s-num">01</span>
+        <h3>Evenimente</h3>
+        <p>Nunți, botezuri, evenimente private și corporate, surprinse natural, fără momente regizate forțat.</p>
+        <ul>
+          <li>Acoperire foto pe tot parcursul zilei</li>
+          <li>Galerie online editată color &amp; alb-negru</li>
+          <li>Fotografii livrate în rezoluție mare</li>
+          <li>Opțional: a doua persoană la filmare</li>
+        </ul>
+        <p class="price">Ofertă personalizată, în funcție de eveniment</p>
+      </article>
+
+      <article class="service full reveal">
+        <span class="s-num">02</span>
+        <h3>Portrete &amp; ședințe foto</h3>
+        <p>Portret editorial, personal branding sau ședințe creative cu lumină controlată în studio sau exterior.</p>
+        <ul>
+          <li>1–2 ore de fotografiere</li>
+          <li>Ghidare de poză pe tot parcursul</li>
+          <li>15–30 cadre editate la alegere</li>
+          <li>Retuș avansat la cerere</li>
+        </ul>
+        <p class="price">Detalii și disponibilitate, la cerere</p>
+      </article>
+
+      <article class="service full reveal">
+        <span class="s-num">03</span>
+        <h3>Video &amp; film</h3>
+        <p>Clipuri cinematice, showreel-uri și conținut pentru social media, de la concept la montaj final.</p>
+        <ul>
+          <li>Imagine cinematică, gândită la nivel de calitate și culoare</li>
+          <li>Montaj cu corecție de culoare</li>
+          <li>Script și concept care leagă totul pentru orice proiect</li>
+          <li>Variante pentru Reels / TikTok / YouTube</li>
+        </ul>
+        <p class="price">Ofertă pe proiect, ajustată la nevoile tale</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="proces">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Cum lucrăm</span>
+        <h2 class="section-title">De la idee la livrare</h2>
+      </div>
+      <p>Un flux simplu și clar, ca să știi exact la ce să te aștepți în fiecare etapă.</p>
+    </div>
+
+    <div class="process">
+      <div class="step reveal">
+        <span class="st-num">1</span>
+        <h4>Discuție</h4>
+        <p>Vorbim despre idee, dată, locație și buget. Stabilim ce vrei să transmiți.</p>
+      </div>
+      <div class="step reveal">
+        <span class="st-num">2</span>
+        <h4>Planificare</h4>
+        <p>Pregătesc concept, listă de cadre și logistica pentru ziua respectivă.</p>
+      </div>
+      <div class="step reveal">
+        <span class="st-num">3</span>
+        <h4>Shooting</h4>
+        <p>Ziua de foto/video, relaxată, ghidată, fără presiune inutilă.</p>
+      </div>
+      <div class="step reveal">
+        <span class="st-num">4</span>
+        <h4>Editare</h4>
+        <p>Selecție, corecție de culoare și retuș, cu atenție la fiecare cadru.</p>
+      </div>
+      <div class="step reveal">
+        <span class="st-num">5</span>
+        <h4>Livrare</h4>
+        <p>Primești galeria online și fișierele finale, gata de folosit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="filmstrip">
+  <div class="filmstrip-head"><span class="dot"></span>Din culise</div>
+  <div class="filmstrip-track">
+    <figure class="filmframe">
+      <img src="IMG_202606260107050.JPEG" alt="Din culise 1" style="object-position:center 30%;">
+    </figure>
+    <figure class="filmframe">
+      <img src="IMG_202606260107052.JPEG" alt="Din culise 2" style="object-position:60% 55%;">
+    </figure>
+    <figure class="filmframe">
+      <img src="IMG_202606260107051.JPEG" alt="Din culise 3" style="object-position:center 32%;">
+    </figure>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Întrebări frecvente</span>
+        <h2 class="section-title">Bine de știut</h2>
+      </div>
+      <p>Răspunsuri scurte la întrebările pe care le primesc cel mai des.</p>
+    </div>
+
+    <div class="faq reveal">
+      <details>
+        <summary>În cât timp primesc fotografiile?</summary>
+        <div class="ans">De obicei în 1–2 săptămâni pentru ședințe și 2–4 săptămâni pentru evenimente mari, în funcție de volum. Pot trimite câteva cadre selecționate mai devreme, la cerere.</div>
+      </details>
+      <details>
+        <summary>Acoperi și evenimente în afara Bucureștiului?</summary>
+        <div class="ans">Da, lucrez în toată țara și pot călători și în afară. Pentru deplasări mai lungi se adaugă costul de transport, discutat din timp.</div>
+      </details>
+      <details>
+        <summary>Cum rezerv o dată?</summary>
+        <div class="ans">Scrie-mi prin formularul de mai jos sau direct pe email/telefon. După ce stabilim detaliile, data se confirmă cu un avans.</div>
+      </details>
+      <details>
+        <summary>Pot cere atât foto, cât și video?</summary>
+        <div class="ans">Sigur. Multe pachete combină foto și video, iar pentru evenimente mari pot veni cu o a doua persoană ca să acoperim totul.</div>
+      </details>
+      <details>
+        <summary>Primesc și fișierele brute (RAW)?</summary>
+        <div class="ans">Livrez fotografiile editate, în format final. Fișierele RAW nu fac parte din pachetul standard, dar le putem discuta separat.</div>
+      </details>
+    </div>
+  </div>
+</section>
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <span class="eyebrow">Hai să lucrăm</span>
+      <p class="contact-lead">Ai un proiect în minte?<br><em>Scrie-mi</em> și hai să-l facem real.</p>
+
+      <ul class="contact-list" style="margin-top:32px;">
+        <li>
+          <span class="k">Email</span>
+
+          <a class="v" href="mailto:filimonmatei1@gmail.com">filimonmatei1@gmail.com</a>
+        </li>
+        <li>
+          <span class="k">Telefon</span>
+          <a class="v" href="tel:+40733966882">+40733966882</a>
+        </li>
+        <li>
+          <span class="k">Instagram</span>
+          <a class="v" href="https://instagram.com/mateiii.rrs" target="_blank" rel="noopener">@mateiii.rrs</a>
+        </li>
+        <li>
+          <span class="k">Locație</span>
+          <span class="v">București, România</span>
+        </li>
+      </ul>
+    </div>
+
+    <form class="contact-form reveal" id="contactForm" data-to="filimonmatei1@gmail.com" novalidate>
+      <div class="form-row">
+        <div class="field">
+          <label for="nume">Nume</label>
+          <input type="text" id="nume" name="nume" placeholder="Numele tău" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="adresa@email.com" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="tip">Tip de proiect</label>
+        <select id="tip" name="tip">
+          <option>Eveniment</option>
+          <option>Portret / ședință foto</option>
+          <option>Video / film</option>
+          <option>Altceva</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="mesaj">Mesaj</label>
+        <textarea id="mesaj" name="mesaj" placeholder="Spune-mi pe scurt despre proiect: dată, locație, idee..." required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Trimite mesajul</button>
+      <p class="form-note" id="formNote">Se deschide aplicația ta de e-mail cu mesajul gata scris. Răspund de obicei în 24–48 de ore.</p>
+    </form>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lb-close" id="lbClose" aria-label="Închide">✕</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Anterioara">‹</button>
+  <div id="lbStage"></div>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Următoarea">›</button>
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<footer>
+  <div class="wrap foot-inner">
+    <a href="#acasa" class="logo">Filimon<span>.</span>Matei</a>
+    <span class="mono">© 2026 · TOATE DREPTURILE REZERVATE</span>
+  </div>
+</footer>
+
+<script>
+  // dezvăluire lină a secțiunilor la scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){
+      e.target.classList.add('in'); io.unobserve(e.target);
+      // după apariția decalată, scoatem întârzierea ca hover-ul să fie instant
+      if(e.target.classList.contains('shot')){
+        const el = e.target;
+        setTimeout(()=>{ el.style.transitionDelay = '0ms'; }, 700);
+      }
+    } });
+  }, { threshold:.12 });
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // închide meniul mobil după ce dai click pe un link
+  document.querySelectorAll('#navlinks a').forEach(a=>{
+    a.addEventListener('click', ()=>document.getElementById('navlinks').classList.remove('open'));
+  });
+
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const shots = Array.from(document.querySelectorAll('.shot'));
+
+  // marchează unele cadre ca „mari" (2×2) ca să dea ritm layoutului.
+  // se aplică doar pe cadrele vizibile, la fiecare al 5-lea, alternând
+  // poziția (stânga/dreapta) ca mozaicul să nu pară mecanic.
+  function layoutMosaic(){
+    const vis = shots.filter(s=>!s.classList.contains('hide'));
+    shots.forEach(s=>s.classList.remove('feat'));
+    for(let i=0; i<vis.length; i+=5){
+      // sare peste ultimele 1-2 cadre ca să nu rămână un gol la final
+      if(i >= vis.length-2) break;
+      const idx = (Math.floor(i/5) % 2 === 0) ? i : i+1;
+      if(vis[idx]) vis[idx].classList.add('feat');
+    }
+  }
+
+  filterBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      filterBtns.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      shots.forEach(s=>{
+        const show = (f === 'toate' || s.dataset.cat === f);
+        s.classList.toggle('hide', !show);
+      });
+      layoutMosaic();
+    });
+  });
+  layoutMosaic(); // la încărcare
+
+  // apariție decalată a cadrelor la scroll (efect mai dinamic)
+  shots.forEach((s,i)=> s.style.transitionDelay = ((i % 8) * 60) + 'ms');
+
+  const lb     = document.getElementById('lightbox');
+  const stage  = document.getElementById('lbStage');
+  const lbCap  = document.getElementById('lbCap');
+  let visible = [];   // pozele vizibile în acel moment
+  let idx = 0;
+
+  function renderLB(){
+    const s = visible[idx];
+    if(!s) return;
+    const img = s.dataset.img;
+    const title = s.dataset.title || '';
+    const cat = s.querySelector('.cap .cat') ? s.querySelector('.cap .cat').textContent : '';
+    stage.innerHTML = img
+      ? '<img src="'+img+'" alt="'+title+'">'
+      : '<div class="lb-empty">FĂRĂ IMAGINE ÎNCĂ</div>';
+    lbCap.innerHTML = (cat? '<b>'+cat+'</b>' : title) +
+                      '  ·  ' + (idx+1) + '/' + visible.length;
+  }
+  function openLB(s){
+    visible = shots.filter(x=>!x.classList.contains('hide'));
+    idx = visible.indexOf(s);
+    renderLB();
+    lb.classList.add('open');
+    lb.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLB(){
+    lb.classList.remove('open');
+    lb.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
+  function step(d){ idx = (idx + d + visible.length) % visible.length; renderLB(); }
+
+  shots.forEach(s=> s.addEventListener('click', ()=>openLB(s)) );
+  document.getElementById('lbClose').addEventListener('click', closeLB);
+  document.getElementById('lbPrev').addEventListener('click', ()=>step(-1));
+  document.getElementById('lbNext').addEventListener('click', ()=>step(1));
+  lb.addEventListener('click', e=>{ if(e.target === lb) closeLB(); });
+  document.addEventListener('keydown', e=>{
+    if(!lb.classList.contains('open')) return;
+    if(e.key === 'Escape') closeLB();
+    if(e.key === 'ArrowLeft') step(-1);
+    if(e.key === 'ArrowRight') step(1);
+  });
+
+  const form = document.getElementById('contactForm');
+  const note = document.getElementById('formNote');
+  if(form){
+    form.addEventListener('submit', e=>{
+      e.preventDefault();
+      const nume  = form.nume.value.trim();
+      const email = form.email.value.trim();
+      const tip   = form.tip.value;
+      const mesaj = form.mesaj.value.trim();
+
+      // validare simplă
+      if(!nume || !email || !mesaj){
+        note.textContent = 'Te rog completează numele, e-mailul și mesajul.';
+        note.style.color = 'var(--red)';
+        return;
+      }
+
+      const to = form.dataset.to;
+      const subiect = 'Cerere proiect (' + tip + ') - ' + nume;
+      const corp =
+        'Nume: ' + nume + '\n' +
+        'Email: ' + email + '\n' +
+        'Tip de proiect: ' + tip + '\n\n' +
+        'Mesaj:\n' + mesaj;
+
+      const link = 'mailto:' + to +
+                   '?subject=' + encodeURIComponent(subiect) +
+                   '&body=' + encodeURIComponent(corp);
+
+      window.location.href = link; // deschide aplicația de e-mail
+      note.textContent = 'S-a deschis aplicația ta de e-mail, apasă „Trimite" acolo ca să-mi ajungă mesajul. Dacă nu s-a deschis, scrie-mi direct la ' + to + '.';
+      note.style.color = 'var(--muted)';
+    });
+  }
+</script>
+</body>
+</html>
